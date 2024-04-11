@@ -1,0 +1,438 @@
+openapi: 3.0.0
+info:
+  title: Mobile Number Portability for Optiva's Customer Management API
+  description: >-
+    This is the Swagger UI environment generated for applicants who are applying for the role of Graduate Technical Writer. **Note:** This Swagger UI environment should not be used for any other purpose.
+
+    Optiva's R&D team have added the following new functionality to the Customer Management API:
+        
+    
+    ### Mobile Number Porting ###
+
+
+    Mobile Number Portability allows subscribers to move their mobile number from one service provider to another. This is possible only when the subscriber's number is eligible for Port In to the new service provider's system.
+
+    For more information, see the `/api/mnp/eligibility` endpoint.
+
+    
+  version: 4.0.0
+paths:
+
+  /api/mnp/eligibility:
+    post:
+      tags:
+        - Mnp Check Eligibility API
+      summary: Check a Customer's Phone Number for Port In eligibility
+      description: >-
+        You must send values for the following mandatory parameters:
+
+          - `phoneNumber` - Subscriber's existing phone number
+
+          - `productType` - Product type that the subscriber wants to add to their Account
+
+          - `targetBrand` - Target brand that the subscriber wants to add to their Account 
+      security:
+        - oauth:
+            scopes: []
+      parameters:
+        - name: spid
+          description: Service Provider Identifier
+          in: header
+          required: true
+          example: 1
+          schema:
+            type: number
+        - name: tenant
+          description: Name of the tenant
+          in: header
+          required: true
+          example: client
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              type: object
+              properties:
+                phoneNumber:
+                  title: Phone number to check
+                  type: string
+                  example: 332222323
+                productType:
+                  title: Product type
+                  type: string
+                  example: EXT_2R
+                targetBrand:
+                  title: Target brand
+                  type: number
+                  example: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  CDMACoverage:
+                    title: CDMA Coverge flag
+                    type: string
+                    example: 'N'
+                  CDMAPostpaidCoverage:
+                    title: CDMA Postpaid Coverage flag
+                    type: string
+                    example: 'Y'
+                  CDMAPrepaidCoverage:
+                    title: CDMA Prepaid Coverage flag
+                    type: string
+                    example: 'Y'
+                  Eligible:
+                    title: Eligible flag
+                    type: string
+                    example: 'Y'
+                  HSPACoverage:
+                    title: HSPA Coverage flag
+                    type: string
+                    example: 'N'
+                  HSPAPostpaidCoverage:
+                    title: HSPA Postpaid Coverage flag
+                    type: string
+                    example: 'Y'
+                  HSPAPrepaidCoverage:
+                    title: HSPA Prepaid Coverage flag
+                    type: string
+                    example: 'Y'
+                  MIKECoverage:
+                    title: MIKE Coverage flag
+                    type: string
+                    example: 'Y'
+                  NPDirectionIndicator:
+                    title: Wireless or Wirline flag
+                    type: string
+                    enum:
+                      - A
+                      - C
+                  OSP:
+                    title: OSP
+                    type: string
+                    example: TU02
+                  ResponseCode:
+                    title: Response code
+                    type: string
+                    example: E999
+        '400':
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                description: >-
+                  Used when an API throws an Error, typically with a HTTP error
+                  response-code (3xx, 4xx, 5xx)
+                required:
+                  - code
+                  - reason
+                type: object
+                properties:
+                  code:
+                    title: >-
+                      Application relevant detail, defined in the API or a
+                      common list.
+                    type: string
+                  reason:
+                    title: >-
+                      Explanation of the reason for the error which can be shown
+                      to a client user.
+                    type: string
+                  message:
+                    title: >-
+                      More details and corrective actions related to the error
+                      which can be shown to a client user.
+                    type: string
+                  status:
+                    title: HTTP Error code extension
+                    type: string
+                  referenceError:
+                    title: URI of documentation describing the error.
+                    type: string
+                  '@baseType':
+                    title: When sub-classing, this defines the super-class.
+                    type: string
+                  '@schemaLocation':
+                    title: >-
+                      A URI to a JSON-Schema file that defines additional
+                      attributes and relationships
+                    type: string
+                  '@type':
+                    title: When sub-classing, this defines the sub-class entity name.
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                description: >-
+                  Used when an API throws an Error, typically with a HTTP error
+                  response-code (3xx, 4xx, 5xx)
+                required:
+                  - code
+                  - reason
+                type: object
+                properties:
+                  code:
+                    title: >-
+                      Application relevant detail, defined in the API or a
+                      common list.
+                    type: string
+                  reason:
+                    title: >-
+                      Explanation of the reason for the error which can be shown
+                      to a client user.
+                    type: string
+                  message:
+                    title: >-
+                      More details and corrective actions related to the error
+                      which can be shown to a client user.
+                    type: string
+                  status:
+                    title: HTTP Error code extension
+                    type: string
+                  referenceError:
+                    title: URI of documentation describing the error.
+                    type: string
+                  '@baseType':
+                    title: When sub-classing, this defines the super-class.
+                    type: string
+                  '@schemaLocation':
+                    title: >-
+                      A URI to a JSON-Schema file that defines additional
+                      attributes and relationships
+                    type: string
+                  '@type':
+                    title: When sub-classing, this defines the sub-class entity name.
+                    type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                description: >-
+                  Used when an API throws an Error, typically with a HTTP error
+                  response-code (3xx, 4xx, 5xx)
+                required:
+                  - code
+                  - reason
+                type: object
+                properties:
+                  code:
+                    title: >-
+                      Application relevant detail, defined in the API or a
+                      common list.
+                    type: string
+                  reason:
+                    title: >-
+                      Explanation of the reason for the error which can be shown
+                      to a client user.
+                    type: string
+                  message:
+                    title: >-
+                      More details and corrective actions related to the error
+                      which can be shown to a client user.
+                    type: string
+                  status:
+                    title: HTTP Error code extension
+                    type: string
+                  referenceError:
+                    title: URI of documentation describing the error.
+                    type: string
+                  '@baseType':
+                    title: When sub-classing, this defines the super-class.
+                    type: string
+                  '@schemaLocation':
+                    title: >-
+                      A URI to a JSON-Schema file that defines additional
+                      attributes and relationships
+                    type: string
+                  '@type':
+                    title: When sub-classing, this defines the sub-class entity name.
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                description: >-
+                  Used when an API throws an Error, typically with a HTTP error
+                  response-code (3xx, 4xx, 5xx)
+                required:
+                  - code
+                  - reason
+                type: object
+                properties:
+                  code:
+                    title: >-
+                      Application relevant detail, defined in the API or a
+                      common list.
+                    type: string
+                  reason:
+                    title: >-
+                      Explanation of the reason for the error which can be shown
+                      to a client user.
+                    type: string
+                  message:
+                    title: >-
+                      More details and corrective actions related to the error
+                      which can be shown to a client user.
+                    type: string
+                  status:
+                    title: HTTP Error code extension
+                    type: string
+                  referenceError:
+                    title: URI of documentation describing the error.
+                    type: string
+                  '@baseType':
+                    title: When sub-classing, this defines the super-class.
+                    type: string
+                  '@schemaLocation':
+                    title: >-
+                      A URI to a JSON-Schema file that defines additional
+                      attributes and relationships
+                    type: string
+                  '@type':
+                    title: When sub-classing, this defines the sub-class entity name.
+                    type: string
+        '405':
+          description: Method Not allowed
+          content:
+            application/json;charset=utf-8:
+              schema:
+                description: >-
+                  Used when an API throws an Error, typically with a HTTP error
+                  response-code (3xx, 4xx, 5xx)
+                required:
+                  - code
+                  - reason
+                type: object
+                properties:
+                  code:
+                    title: >-
+                      Application relevant detail, defined in the API or a
+                      common list.
+                    type: string
+                  reason:
+                    title: >-
+                      Explanation of the reason for the error which can be shown
+                      to a client user.
+                    type: string
+                  message:
+                    title: >-
+                      More details and corrective actions related to the error
+                      which can be shown to a client user.
+                    type: string
+                  status:
+                    title: HTTP Error code extension
+                    type: string
+                  referenceError:
+                    title: URI of documentation describing the error.
+                    type: string
+                  '@baseType':
+                    title: When sub-classing, this defines the super-class.
+                    type: string
+                  '@schemaLocation':
+                    title: >-
+                      A URI to a JSON-Schema file that defines additional
+                      attributes and relationships
+                    type: string
+                  '@type':
+                    title: When sub-classing, this defines the sub-class entity name.
+                    type: string
+        '409':
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                description: >-
+                  Used when an API throws an Error, typically with a HTTP error
+                  response-code (3xx, 4xx, 5xx)
+                required:
+                  - code
+                  - reason
+                type: object
+                properties:
+                  code:
+                    title: >-
+                      Application relevant detail, defined in the API or a
+                      common list.
+                    type: string
+                  reason:
+                    title: >-
+                      Explanation of the reason for the error which can be shown
+                      to a client user.
+                    type: string
+                  message:
+                    title: >-
+                      More details and corrective actions related to the error
+                      which can be shown to a client user.
+                    type: string
+                  status:
+                    title: HTTP Error code extension
+                    type: string
+                  referenceError:
+                    title: URI of documentation describing the error.
+                    type: string
+                  '@baseType':
+                    title: When sub-classing, this defines the super-class.
+                    type: string
+                  '@schemaLocation':
+                    title: >-
+                      A URI to a JSON-Schema file that defines additional
+                      attributes and relationships
+                    type: string
+                  '@type':
+                    title: When sub-classing, this defines the sub-class entity name.
+                    type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                description: >-
+                  Used when an API throws an Error, typically with a HTTP error
+                  response-code (3xx, 4xx, 5xx)
+                required:
+                  - code
+                  - reason
+                type: object
+                properties:
+                  code:
+                    title: >-
+                      Application relevant detail, defined in the API or a
+                      common list.
+                    type: string
+                  reason:
+                    title: >-
+                      Explanation of the reason for the error which can be shown
+                      to a client user.
+                    type: string
+                  message:
+                    title: >-
+                      More details and corrective actions related to the error
+                      which can be shown to a client user.
+                    type: string
+                  status:
+                    title: HTTP Error code extension
+                    type: string
+                  referenceError:
+                    title: URI of documentation describing the error.
+                    type: string
+                  '@baseType':
+                    title: When sub-classing, this defines the super-class.
+                    type: string
+                  '@schemaLocation':
+                    title: >-
+                      A URI to a JSON-Schema file that defines additional
+                      attributes and relationships
+                    type: string
+                  '@type':
+                    title: When sub-classing, this defines the sub-class entity name.
+                    type: string
